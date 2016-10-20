@@ -23,6 +23,14 @@ router.get('/:id', function(req, res, next){
   })
 });
 
+router.get('/:id/cardenetas', function(req, res, next){
+  User.findById(req.params.id, function(err, user){
+    Cardeneta.find({_id: {$in: user['cardenetas']}}).exec(function(err, post){
+      res.json(post);
+    });
+  });
+});
+
 router.post('/:id/cardenetas', function(req, res, next){
   User.findById(req.params.id, function(err, user){
     Cardeneta.create(req.body, function(err, new_card){
