@@ -4,8 +4,6 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var User = require('../models/User.js');
 var Cardeneta = require('../models/Cardeneta.js');
-var UserCard = require('../models/UserCard.js');
-
 var failed_to_login = function(res){
   res.json({success: false, message: 'Authentication failed. Wrong user or wrong password.'});
 }
@@ -25,16 +23,20 @@ router.get('/:id', function(req, res, next){
 });
 
 router.get('/:id/cardenetas', function(req, res, next){
- var obj;
-
+  User.findById(req.params.id, function(err, user){
+    Cardeneta.find({_id: {$in: user['cardenetas']}}).exec(function(err, post){
+      res.json(post);
+    });
+  });
 });
 
 router.post('/:id/cardenetas', function(req, res, next){
-  Cardeneta.create(req.body, function(err, post){
-    if(err) return next(err);
-    UserCard.create({'id_user': req.params.id, 'id_card': post['_id']}, function(err_card, post_card){
-      if (err_card) return new(err_card);
-      res.json(post);
+  User.findById(req.params.id, function(err, user){
+    Cardeneta.create(req.body, function(err, new_card){
+      user.cardenetas.push(new_card);
+      user.save(function(err, post){
+        res.json(post);
+      });
     });
   });
 });
