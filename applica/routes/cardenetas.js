@@ -14,7 +14,7 @@ router.get('/', function(req, res, next){
 router.get('/:id', function(req, res, next){
   Cardeneta.findById(req.params.id, function(err, post){
     if (err) return next(err);
-    res.json()
+    res.json(post);
   });
 });
 
