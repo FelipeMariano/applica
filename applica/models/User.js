@@ -15,6 +15,6 @@ var UserSchema = new mongoose.Schema({
 
 UserSchema.plugin(relationship, {
   relationshipPathName: 'cardenetas'
-})
+});
 
 module.exports = mongoose.model('User', UserSchema);

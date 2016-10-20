@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var cardenetas = require('./routes/cardenetas');
+var aplicacoes = require('./routes/aplicacoes');
+
 var auth = require('./routes/authenticate');
 var jwt = require('jsonwebtoken');
 var config = require('./config');
@@ -24,10 +26,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/authenticate', auth);
 app.use('/api', routes);
 app.use('/api/users', users);
-app.use('/authenticate', auth);
 app.use('/api/cardenetas', cardenetas);
+app.use('/api/aplicacoes', aplicacoes);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
