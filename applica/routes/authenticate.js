@@ -6,15 +6,18 @@ var User = require('../models/User.js');
 var jwt = require('jsonwebtoken');
 
 
-
+function failed_to_login(res){
+    res.json({success: false, message: 'Incorrect e-mail or password'});
+}
 
 router.post('/', function(req, res){
   var user_email = req.body.email
   var user_pass = req.body.password
+
   User.findOne({email: user_email}, function(err, user){
   if(err) throw err;
 
-    if(!user || (user.password != user_pass)){
+    if(!user || (user.password != user_pass) || (user_email === undefined || user_pass === undefined)){
       failed_to_login(res);
     }else{
       var token = jwt.sign(user, req.app.get('secretToken'));
