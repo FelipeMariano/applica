@@ -23,12 +23,15 @@ router.get('/:id', function(req, res, next){
   })
 });
 
-router.get('/:id/cardenetas', function(req, res, next){
-
-});
-
 router.post('/:id/cardenetas', function(req, res, next){
-
+  User.findById(req.params.id, function(err, user){
+    Cardeneta.create(req.body, function(err, new_card){
+      user.cardenetas.push(new_card);
+      user.save(function(err, post){
+        res.json(post);
+      });
+    });
+  });
 });
 
 router.post('/', function(req, res, next){
