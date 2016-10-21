@@ -16,16 +16,17 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get('/:id', function(req, res, next){
-  User.findById(req.params.id, function(err, post){
-    if(err) next(err);
+router.get('/:id', function (req, res, next){
+  const select = "nome authToken email cardenetas";
+  var criteria = {_id: req.params.id};
+  User.load({criteria, select}, function(err, post){
     res.json(post);
-  })
+  });
 });
 
 router.get('/:id/cardenetas', function(req, res, next){
   User.findById(req.params.id, function(err, user){
-    Cardeneta.find({_id: {$in: user['cardenetas']}}).exec(function(err, post){
+    Cardeneta.find({_id: {$in: user['cardenetas']}}, function(err, post){
       res.json(post);
     });
   });
@@ -43,10 +44,14 @@ router.post('/:id/cardenetas', function(req, res, next){
 });
 
 router.post('/', function(req, res, next){
-  User.create(req.body, function(err, post){
-    if(err) return next(err);
+  var user = new User(req.body);
+  user.save(function(err, post){
     res.json(post);
   });
+//  User.create(req.body, function(err, post){
+  //  if(err) return next(err);
+  //  res.json(post);
+//  });
 });
 
 
