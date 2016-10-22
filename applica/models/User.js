@@ -17,7 +17,8 @@ var UserSchema = new mongoose.Schema({
   salt: {type: String, default: ''},
   joined_at: {type: Date},
   updated_at: {type: Date, default: Date.now},
-  cardenetas: [{type: mongoose.Schema.Types.ObjectId, ref: 'Cardeneta', childPath: 'users'}]
+  cardenetas: [{type: mongoose.Schema.Types.ObjectId, ref: 'Cardeneta', childPath: 'users'}],
+  pendings: [{type: mongoose.Schema.Types.ObjectId, ref: 'Share'}]
 });
 
 const validatePresenceOf = value => value && value.length;

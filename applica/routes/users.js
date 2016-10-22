@@ -4,6 +4,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var User = require('../models/User.js');
 var Cardeneta = require('../models/Cardeneta.js');
+var Share = require('../models/Share.js');
 
 var failed_to_login = function(res){
   res.json({success: false, message: 'Authentication failed. Wrong user or wrong password.'});
@@ -40,6 +41,15 @@ router.post('/:id/cardenetas', function(req, res, next){
         res.json(post);
       });
     });
+  });
+});
+
+router.get('/:id/pendings', function(req, res, next){
+  User.findById(req.params.id, function(err, user){
+    if(err) next(err);
+    Share.find({_id: {$in: user.pendings}}).exec(function(err, post){
+      res.json(post);
+    })
   });
 });
 

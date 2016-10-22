@@ -10,6 +10,7 @@ var users = require('./routes/users');
 var cardenetas = require('./routes/cardenetas');
 var aplicacoes = require('./routes/aplicacoes');
 var vacinas = require('./routes/vacinas');
+var share = require('./routes/share');
 
 var auth = require('./routes/authenticate');
 var jwt = require('jsonwebtoken');
@@ -33,6 +34,7 @@ app.use('/api/users', users);
 app.use('/api/cardenetas', cardenetas);
 app.use('/api/aplicacoes', aplicacoes);
 app.use('/api/vacinas', vacinas);
+app.use('/api/share', share);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
