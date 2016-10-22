@@ -23,7 +23,6 @@ UserSchema.virtual('password')
     this._password = password;
     this.salt = this.makeSalt();
     this.hashed_password = this.encryptPassword(password);
-    this.authToken = this.makeToken();
   })
   .get(function(){
     return this._password;
@@ -34,6 +33,16 @@ UserSchema.plugin(relationship, {
 });
 
 ///Validations:
+
+UserSchema.path('email').validate(function(email, fn){
+  const User = mongoose.model('User');
+
+  if(this.isNew || this.isModified('email')){
+    User.find({email: email}).exec(function(err, users){
+      fn(!err && users.length === 0);
+    });
+  } else fn(true);
+}, 'Invalid e-mail');
 
 UserSchema.path('hashed_password').validate(function(hashed_password){
   return hashed_password.length && this._password.length;

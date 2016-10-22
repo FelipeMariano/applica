@@ -45,13 +45,13 @@ router.post('/:id/cardenetas', function(req, res, next){
 
 router.post('/', function(req, res, next){
   var user = new User(req.body);
-  user.save(function(err, post){
-    res.json(post);
+  user.validate(function(err){
+    console.log(err);
   });
-//  User.create(req.body, function(err, post){
-  //  if(err) return next(err);
+  res.json({'testing': 'ok'});
+  //user.save(function(err, post){
   //  res.json(post);
-//  });
+  //});
 });
 
 

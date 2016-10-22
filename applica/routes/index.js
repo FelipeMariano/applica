@@ -1,7 +1,26 @@
 var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
+var User = require('../models/User.js');
 /* GET home page. */
+
+router.post('/signUp', function(req, res, next){
+  var user = new User(req.body);
+  user.validate(function(err){
+    if(err)
+    res.json({
+      'success': 'false',
+      'message': 'e-mail inválido'
+    });
+    else{
+      user.save(function(err, post){
+        if(err) next(err);
+        res.json(post);
+      });
+    }
+  });
+});
+
 router.use(function(req, res, next){
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
