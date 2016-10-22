@@ -1,4 +1,35 @@
 {
+  "idades": {
+    "_model": "Idade",
+    "recem_nasc": {
+      "idade": 0,
+      "tipo": "Recém nascido"
+    },
+    "1_mes": {
+      "idade": 1,
+      "tipo": "mes"
+    },
+    "2_meses": {
+      "idade": 2,
+      "tipo": "mes"
+    },
+    "3_meses": {
+      "idade": 3,
+      "tipo": "mes"
+    },
+    "4_meses": {
+      "idade": 4,
+      "tipo": "mes"
+    },
+    "5_meses": {
+      "idade": 5,
+      "tipo": "mes"
+    },
+    "6_meses": {
+      "idade": 6,
+      "tipo": "mes"
+    }
+  },
   "doencas": {
     "_model": "Doenca",
     "tuberculose":{
@@ -13,7 +44,7 @@
     "hepatite_b":{
       "nome": "Hepatite B"
     },
-    "poliomielite": {
+    "poliomilite": {
       "nome": "Poliomelite (Paralísia infantil)"
     },
     "pneumonia": {
@@ -51,15 +82,74 @@
     },
     "rubeola": {
       "nome": "Rubéola"
+    },
+    "caxumba": {
+      "nome": "Caxumba"
+    },
+    "influenza": {
+      "nome": "Influenza"
+    },
+    "gripe": {
+      "nome": "Gripe"
     }
   },
   "vacinas": {
     "_model": "Vacina",
+    "0": {
+      "nome": "BCG-ID",
+      "idades_dose": [
+        "->idades.recem_nasc",
+        "->idades.1_mes"
+      ],
+      "doencas": [
+        "->doencas.tuberculose"
+      ]
+    },
     "1": {
       "nome": "Hepatite B",
-      "idade_mes": 0,
+      "idades_dose": [
+        "->idades.recem_nasc",
+        "->idades.1_mes"
+      ],
       "doencas": [
         "->doencas.hepatite_b"
+      ]
+    },
+    "2": {
+      "nome": "Oral contra a Pólio",
+      "idades_mes": [2],
+      "doencas": [
+        "->doencas.Poliomelite"
+      ]
+    },
+    "3": {
+      "nome": "Tetravalente",
+      "idades_mes": [2],
+      "doencas": [
+        "->doencas.difteria", "->doencas.tetano", "->doencas.coqueluche",
+        "->doencas.meningite", "->doencas.haemophius_influenzae"
+      ]
+    },
+    "4": {
+      "nome": "Rotavírus humano",
+      "idades_mes": [2],
+      "doencas": [
+        "->doencas.rotavirus"
+      ]
+    },
+    "5": {
+      "nome": "Pneumococos",
+      "idades_mes": [2],
+      "doencas": [
+        "->doencas.otite", "->doencas.sinusite", "->doencas.pneumonia",
+        "->doencas.streptococcus_pneumoniae"
+      ]
+    },
+    "6": {
+      "nome": "Meningococo C",
+      "idades_mes": [3],
+      "doencas": [
+        "->doencas.meningitidis"
       ]
     }
   }
