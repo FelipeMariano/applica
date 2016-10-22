@@ -1,14 +1,66 @@
 {
-  "doencas":{
+  "doencas": {
     "_model": "Doenca",
-    "1":{
+    "tuberculose":{
+      "nome": "Tuberculose"
+    },
+    "difteria":{
       "nome": "Difteria"
     },
-    "2":{
+    "tetano":{
       "nome": "Tétano"
     },
-    "3":{
+    "hepatite_b":{
       "nome": "Hepatite B"
+    },
+    "poliomielite": {
+      "nome": "Poliomelite (Paralísia infantil)"
+    },
+    "pneumonia": {
+      "nome": "Pneumonia"
+    },
+    "meningite": {
+      "nome": "Meningite"
+    },
+    "rotavirus": {
+      "nome": "Doenças diarréicas por Rotavírus"
+    },
+    "otite": {
+      "nome": "Otite"
+    },
+    "sinusite": {
+      "nome": "Sinusite"
+    },
+    "streptococcus_pneumoniae": {
+      "nome": "Meningite causada pelo Streptococcus pneumoniae"
+    },
+    "invasivas_neisseria": {
+      "nome": "Doença invasiva causada por Neisseria meningitidis do Sorogrupo C"
+    },
+    "coqueluche": {
+      "nome": "Coqueluche"
+    },
+    "haemophius_influenzae": {
+      "nome": "Infecções causadas por Haemophilus Influenzae"
+    },
+    "febre_amarela": {
+      "nome": "Febre amarela"
+    },
+    "sarampo": {
+      "nome": "Sarampo"
+    },
+    "rubeola": {
+      "nome": "Rubéola"
+    }
+  },
+  "vacinas": {
+    "_model": "Vacina",
+    "1": {
+      "nome": "Hepatite B",
+      "idade_mes": 0,
+      "doencas": [
+        "->doencas.hepatite_b"
+      ]
     }
   }
 }

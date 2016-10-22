@@ -1,4 +1,5 @@
 var Doenca = require('./Doenca.js');
+var Vacina = require('./Vacina.js');
 var seeder = require('mongoose-seeder');
 var data = require('./seed.json');
 
