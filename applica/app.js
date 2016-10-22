@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+const seeder = require('./models/seeder.js');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -11,6 +12,7 @@ var cardenetas = require('./routes/cardenetas');
 var aplicacoes = require('./routes/aplicacoes');
 var vacinas = require('./routes/vacinas');
 var share = require('./routes/share');
+var doencas = require('./routes/doencas');
 
 var auth = require('./routes/authenticate');
 var jwt = require('jsonwebtoken');
@@ -35,6 +37,7 @@ app.use('/api/cardenetas', cardenetas);
 app.use('/api/aplicacoes', aplicacoes);
 app.use('/api/vacinas', vacinas);
 app.use('/api/share', share);
+app.use('/api/doencas', doencas);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -76,7 +79,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/applica')
   .then(() => {
     console.log('connection successful');
-    console.log('Applying seeds...');
+    seeder();
   })
   .catch((err) => console.error(err));
 

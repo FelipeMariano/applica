@@ -1,0 +1,14 @@
+{
+  "doencas":{
+    "_model": "Doenca",
+    "1":{
+      "nome": "Difteria"
+    },
+    "2":{
+      "nome": "Tétano"
+    },
+    "3":{
+      "nome": "Hepatite B"
+    }
+  }
+}
