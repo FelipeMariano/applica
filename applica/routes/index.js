@@ -16,7 +16,9 @@ router.post('/signUp', function(req, res, next){
     else{
       user.save(function(err, post){
         if(err) next(err);
-        res.json(post);
+        console.log("New user created");
+        //307 vai indicar que vou redirecionar com msm metodo (POST)
+        res.redirect(307, '/authenticate');
       });
     }
   });
