@@ -11,7 +11,7 @@ var seed = function(){
   })
 
   seeder.seed(data).then(function(dbData){
-    console.log("seeded com sucesso!\n------------\n");
+    console.log("seeded com sucesso!\n------------");
   }).catch(function(err){
     console.log("erro ao inserir: " + err);
   });
