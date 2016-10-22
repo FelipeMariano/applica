@@ -74,7 +74,10 @@ var mongoose = require('mongoose')
 mongoose.Promise = global.Promise;
 
 mongoose.connect('mongodb://localhost/applica')
-  .then(() => console.log('connection successful'))
+  .then(() => {
+    console.log('connection successful');
+    console.log('Applying seeds...');
+  })
   .catch((err) => console.error(err));
 
 
