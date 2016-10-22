@@ -13,6 +13,7 @@ var aplicacoes = require('./routes/aplicacoes');
 var vacinas = require('./routes/vacinas');
 var share = require('./routes/share');
 var doencas = require('./routes/doencas');
+var locais = require('./routes/locais');
 
 var auth = require('./routes/authenticate');
 var jwt = require('jsonwebtoken');
@@ -38,6 +39,7 @@ app.use('/api/aplicacoes', aplicacoes);
 app.use('/api/vacinas', vacinas);
 app.use('/api/share', share);
 app.use('/api/doencas', doencas);
+app.use('/api/locais', locais);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

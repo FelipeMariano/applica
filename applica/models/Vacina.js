@@ -5,7 +5,8 @@ var VacinaSchema = new mongoose.Schema({
   nome: String,
   idades_dose: [{type: mongoose.Schema.Types.ObjectId, ref:'Idade', childPath: 'idades_dose'}],
   doencas: [{type: mongoose.Schema.Types.ObjectId, ref: 'Doenca', childPath: 'doencas'}],
-  aplicacoes: [{type: mongoose.Schema.Types.ObjectId, ref: 'Aplicacao', childPath: 'aplicacoes'}]
+  aplicacoes: [{type: mongoose.Schema.Types.ObjectId, ref: 'Aplicacao', childPath: 'aplicacoes'}],
+  locais: [{type: mongoose.Schema.Types.ObjectId, ref: 'Local', childPath: 'locais'}]
 });
 
 VacinaSchema.plugin(relationship, {
