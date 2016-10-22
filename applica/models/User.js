@@ -4,6 +4,10 @@ var jwt = require('jsonwebtoken');
 var Cardeneta = require('./Cardeneta.js');
 var relationship = require('mongoose-relationship');
 
+const oAuthTypes = [
+  'local'
+]
+
 var UserSchema = new mongoose.Schema({
   nome: String,
   sobrenome: String,
@@ -28,10 +32,6 @@ UserSchema.virtual('password')
     return this._password;
   });
 
-UserSchema.plugin(relationship, {
-  relationshipPathName: 'cardenetas'
-});
-
 ///Validations:
 
 UserSchema.path('email').validate(function(email, fn){
@@ -43,10 +43,6 @@ UserSchema.path('email').validate(function(email, fn){
     });
   } else fn(true);
 }, 'Invalid e-mail');
-
-UserSchema.path('hashed_password').validate(function(hashed_password){
-  return hashed_password.length && this._password.length;
-}, 'Password vazio!');
 
 UserSchema.pre('save', function(next){
   if(!this.isNew) return next();
@@ -82,6 +78,10 @@ UserSchema.methods = {
     }catch(err){
       return '';
     }
+  },
+
+  skipValidation: function(){
+    return ~oAuthTypes.indexOf(this.provider);
   }
 }
 
@@ -93,5 +93,11 @@ UserSchema.statics = {
     next();
   }
 }
+
+
+UserSchema.plugin(relationship, {
+  relationshipPathName: 'cardenetas'
+});
+
 
 module.exports = mongoose.model('User', UserSchema);

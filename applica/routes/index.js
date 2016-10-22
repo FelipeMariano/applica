@@ -6,6 +6,7 @@ var User = require('../models/User.js');
 
 router.post('/signUp', function(req, res, next){
   var user = new User(req.body);
+  user.provider = 'local';
   user.validate(function(err){
     if(err)
     res.json({

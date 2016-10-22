@@ -16,7 +16,7 @@ router.post('/', function(req, res){
   User.findOne({email: user_email}, function(err, user){
   if(err) throw err;
 
-    if(!user || (!user.authentcate(user_pass)) || (user_email === undefined || user_pass === undefined)){
+    if(!user || (!user.authenticate(user_pass)) || (user_email === undefined || user_pass === undefined)){
       failed_to_login(res);
     }else{
       var token = jwt.sign(user, req.app.get('secretToken'));
